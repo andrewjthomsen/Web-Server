@@ -39,18 +39,39 @@ app.get("/help", (req, res) => {
 });
 
 app.get("/weather", (req, res) => {
+  if (!req.query.address) {
+    return res.send({
+      error: "You must provide an address!"
+    });
+  }
+
+  console.log(req.query.address);
   res.send({
     forecast: "Its raining.",
-    location: "Seattle, Washington"
+    location: "Seattle, Washington",
+    address: req.query.address
+  });
+});
+
+app.get("/products", (req, res) => {
+  if (!req.query.search) {
+    return res.send({
+      error: "You must provide a search term!"
+    });
+  }
+
+  console.log(req.query.search);
+  res.send({
+    products: []
   });
 });
 
 app.get("/help/*", (req, res) => {
   res.render("404", {
     title: "404",
-    name:"Andrew Thomsen",
+    name: "Andrew Thomsen",
     errorMessage: "Help article not found."
-  })
+  });
 });
 
 app.get("*", (req, res) => {
@@ -58,7 +79,7 @@ app.get("*", (req, res) => {
     title: "404",
     name: "Andrew Thomsen",
     errorMessage: "Page not found."
-  })
+  });
 });
 
 app.listen(3000, () => {
