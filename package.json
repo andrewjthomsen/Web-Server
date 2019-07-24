@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/andrewjthomsen/Web-Server#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "hbs": "^4.0.4",
+    "path": "^0.12.7"
   }
 }
