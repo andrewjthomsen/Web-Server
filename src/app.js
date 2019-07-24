@@ -45,9 +45,22 @@ app.get("/weather", (req, res) => {
   });
 });
 
+app.get("/help/*", (req, res) => {
+  res.render("404", {
+    title: "404",
+    name:"Andrew Thomsen",
+    errorMessage: "Help article not found."
+  })
+});
+
 app.get("*", (req, res) => {
-  res.send("My 404 page!")
-})
+  res.render("404", {
+    title: "404",
+    name: "Andrew Thomsen",
+    errorMessage: "Page not found."
+  })
+});
+
 app.listen(3000, () => {
   console.log("Server running on PORT 3000.");
 });
