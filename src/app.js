@@ -1,10 +1,20 @@
 const path = require("path");
 const express = require("express");
+const hbs = require("hbs");
 
 const app = express();
-const publicDirectoryPath = path.join(__dirname, "../public");
 
+// Responsible for defining paths for Express config
+const publicDirectoryPath = path.join(__dirname, "../public");
+const viewsPath = path.join(__dirname, "../templates/views");
+const partialPath = path.join(__dirname, "../templates/partials");
+
+// Setup hbs engine and views location
 app.set("view engine", "hbs");
+app.set("views", viewsPath);
+hbs.registerPartials(partialPath);
+
+// Setup static directory to serve
 app.use(express.static(publicDirectoryPath));
 
 app.get("", (req, res) => {
@@ -23,7 +33,8 @@ app.get("/about", (req, res) => {
 
 app.get("/help", (req, res) => {
   res.render("help", {
-    helpText: "This is some helpful text."
+    title: "Help",
+    name: "Andrew Thomsen"
   });
 });
 
